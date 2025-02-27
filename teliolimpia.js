@@ -19,10 +19,18 @@ const db = mysql.createConnection({
 
 app.get("/", (req, res) => {
 
-    res.send("Müködik a szerver.")
+    res.send("Működik a szerver.")
 })
 
+app.get("/v", (req, res) =>{
+    const sql = "SELECT * FROM versenyzok";
+    db.query(sql, (err, result) =>{
+        if(err) return res.status(500).json({ error: err.message});
+        res.json(result);
+    })
 
+
+})
 
 
 app.listen(3000, () =>{
